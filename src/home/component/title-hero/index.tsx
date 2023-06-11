@@ -7,7 +7,7 @@ export const TitleHero = component$(() => {
   return(
    <article id='title-hero' class='w-full grid place-content-center ' >
 
-    <h1 class={[styles.title, 'relative w-full lg:text-9xl lg:p-0']}>
+    <h1 class={[styles.title, 'relative w-full ']}>
       <div class='absolute top-0 lg:-top-20 left-0 lg:left-auto lg:right-0 w-full h-full grid place-items-center lg:place-items-end  '>
         <img width={0} height={0} class='ml-[8rem]  w-48 h-48'  src='/images/pokeball.png' alt='pokeball'/>
       </div>

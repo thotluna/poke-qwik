@@ -37,7 +37,16 @@
 }
 
 @media (min-width: 1024px) {
+  .title{
+    padding: 0;
+    font-size: 8rem;
+  }
   .title span {
     display: inline-block;
+    font-size: 8rem;
+    line-height: 1.5;
+  }
+  .title span::before{
+    font-size: 8rem;
   }
 }
