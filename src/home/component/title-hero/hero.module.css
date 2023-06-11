@@ -1,0 +1,43 @@
+
+.title{
+  padding: 1rem;
+}
+
+.title span{
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.15rem;
+  line-height: .8;
+  color: white;
+  padding-bottom: 19px;
+}
+
+.title span::before{
+  content: var(--content);
+  font-size: 5rem;
+  position: absolute;
+  background: linear-gradient(90deg, var(--start-color), var(--end-color));
+  inset: 0;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animated 9s infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes animated{
+  0%, 16.667%, 100%{
+    opacity: 1;
+  }
+  33.333%, 83.333%{
+    opacity: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title span {
+    display: inline-block;
+  }
+}

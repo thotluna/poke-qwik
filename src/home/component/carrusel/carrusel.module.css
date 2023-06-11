@@ -1,0 +1,32 @@
+.slider{
+  width: 75vw;
+  height: auto;
+  margin: auto;
+  overflow: hidden;
+}
+
+.track{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  animation: scroll 10s linear infinite;
+  width: calc(130px *8 );
+
+}
+
+.slide{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+@keyframes scroll{
+  0% {
+    transform: translateX(0)
+  }
+  100% {
+    transform: translateX(calc(-130px * 4 ))
+  }
+}
