@@ -26,7 +26,8 @@ export const usePokemonGame = () => {
     track(() => state.pokemonId)
     const baseUrl = location.url
     
-    const res = await fetch(`http://${baseUrl.host}/api/pokemon/${state.pokemonId}`)
+    
+    const res = await fetch(`${baseUrl.origin}/api/pokemon/${state.pokemonId}`)
     const pokemon = await res.json() as SmallPokemon
    
     state.name = pokemon.name.toLocaleUpperCase()
