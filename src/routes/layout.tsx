@@ -4,8 +4,6 @@ export default component$(() => {
 
 
   return (
-    <div class='container mx-auto lg:p-16'>
       <Slot />
-    </div>
   );
 });

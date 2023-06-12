@@ -33,7 +33,7 @@ export default component$(() => {
     <PokemonGameProvider>
       <PokemonListProvider>
         <NavBar />
-        <main class='container mx-auto p-4 flex-1 py-4'>
+        <main class='container mx-auto h-full p-4 flex-1 py-4'>
           <Slot />
         </main>
         <Footer />
