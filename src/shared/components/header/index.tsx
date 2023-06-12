@@ -9,7 +9,7 @@ export const Header = component$<HeaderProps>(({title}) => {
   return(
     <header class='w-full flex flex-col items-center'>
       <Title>{title}</Title>
-      <div class='flex items-center justify-between gap-8 m-12'>
+      <div class='flex items-center justify-between gap-8 m-4'>
         <Slot />
       </div>
     </header>

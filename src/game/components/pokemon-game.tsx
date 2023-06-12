@@ -1,10 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import { Button } from "~/shared/components/button";
+import { Header } from "~/shared/components/header";
 import { ImagePokemon } from "~/shared/components/image-pokemon";
 
 interface PokemonGameProps{
   pokemonId: number
+  name?: string
   isVisible: boolean
   isBackView: boolean
   titleViewButton: string
@@ -17,6 +19,7 @@ interface PokemonGameProps{
 
 export const PokemonGame = component$<PokemonGameProps>(({
   pokemonId,
+  name,
   isVisible,
   isBackView,
   titleViewButton,
@@ -29,22 +32,22 @@ export const PokemonGame = component$<PokemonGameProps>(({
 
 
   return (
-      <section class='flex justify-center items-center'> 
-        <article class='flex flex-col items-center' >
-          <header>
-            <h1 class='text-4xl lg:text-5xl font-bold p-4 text-white'>POKEMON CHARACTER</h1>
-          </header>
-          <span class='text-2xl'>Simple Search</span>
-          <span class='text-9xl'>{pokemonId}</span>
+      <section class='flex h-full justify-center items-center text-white'> 
+        <article class='flex h-full flex-col items-center justify-between' >
+           <Header title="POKEMON CHARACTER" />
 
-          <Link href={`/game/pokemon/${pokemonId}`}>
-            <ImagePokemon 
-              pokemonId={pokemonId} 
-              isBackImage={isBackView}
-              isVisible={isVisible}/>
-          </Link>
+          <div class='flex flex-col item justify-between flex-1'>
+            <span class='text-2xl text-center'>{name}</span>
+            <span class='text-7xl text-center '>{pokemonId}</span>
+            <Link href={`/game/pokemon/${pokemonId}`}>
+              <ImagePokemon 
+                pokemonId={pokemonId} 
+                isBackImage={isBackView}
+                isVisible={isVisible}/>
+            </Link>
+          </div>
           
-          <footer class='w-full flex flex-row flex-wrap items-center justify-center p-4 gap-8'>
+          <footer class='w-full flex flex-row flex-wrap items-center justify-center px-8 py-2 gap-4'>
   
             <Button
               onClick={ toggleFromBack }>
@@ -55,11 +58,15 @@ export const PokemonGame = component$<PokemonGameProps>(({
                 {titleShowMeButton}
             </Button>
             <Button 
+              type="Button-Outline"
               onClick={lastPokemons}
-              disabled={pokemonId <= 0}>
+              disabled={pokemonId <= 1}>
               Last
             </Button>
-            <Button onClick={nextPokemons}>
+            <Button 
+              type="Button-Outline"
+              disabled={pokemonId >= 1282}
+              onClick={nextPokemons}>
               Next
             </Button>
           </footer>

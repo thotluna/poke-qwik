@@ -24,6 +24,7 @@ export const PokemonListProvider = component$ (() => {
 
   useVisibleTask$(({track}) => {
     track(() => [pokemonListState.pokemons, pokemonListState.currentPage])
+    
     localStorage.setItem(KEY_LIST_LOCAL_STORAGE, JSON.stringify(pokemonListState))
 
   })

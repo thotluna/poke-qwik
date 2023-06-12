@@ -8,10 +8,7 @@ export const PokemonGameProvider = component$(() => {
   const pokemonGameState = useStore<PokemonGameState>(PokemonGameStateInitial)
 
   useVisibleTask$(() => {
-
-    console.log('first', pokemonGameState);
-    
-
+  
     if(localStorage.getItem(KEY_GAME_LOCAL_STORAGE)){
       const {
         pokemonId = 10,
@@ -28,7 +25,6 @@ export const PokemonGameProvider = component$(() => {
 
   useVisibleTask$(({track}) => {
     track(() => [pokemonGameState.pokemonId, pokemonGameState.isVisible, pokemonGameState.isBackView])
-    console.log('second', pokemonGameState);
     localStorage.setItem(KEY_GAME_LOCAL_STORAGE, JSON.stringify(pokemonGameState))
   })
 

@@ -1,4 +1,5 @@
 import { component$, useComputed$, useSignal, useTask$ } from '@builder.io/qwik';
+import { Loading } from '../loading';
 
 export interface ImagePokemonProps {
   pokemonId: number;
@@ -22,8 +23,8 @@ export const ImagePokemon = component$<ImagePokemonProps>(({pokemonId, isBackIma
 
   return (
     <>
-      <picture class=' w-52 h-56 flex items-center justify-center'>
-        {!isLoad.value && <span>Loading...</span>}
+      <picture class=' w-48 h-48 flex items-center justify-center'>
+        {!isLoad.value && <Loading />}
         <img 
           width={208}
           height={0}
@@ -33,7 +34,7 @@ export const ImagePokemon = component$<ImagePokemonProps>(({pokemonId, isBackIma
           class={[{
             'hidden': !isLoad.value,
             'brightness-0': !isVisible
-          }, 'w-52 transition-all duration-700']}
+          }, 'w-48 transition-all duration-700']}
           />
       </picture>
     </>

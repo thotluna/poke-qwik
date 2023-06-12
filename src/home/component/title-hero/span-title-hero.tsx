@@ -1,5 +1,5 @@
-import { component$ } from '@builder.io/qwik'
-import styles from './hero.module.css'
+import { component$, useStylesScoped$ } from '@builder.io/qwik'
+import styles from './hero.module.css?inline'
 
 interface WorldTitleHeroProps{
   content: string
@@ -10,6 +10,9 @@ interface WorldTitleHeroProps{
 }
 
 export const WorldTitleHero = component$<WorldTitleHeroProps>(({ content, colorStart,colorMeddle = undefined, colorEnd, delay}) => {
+
+  useStylesScoped$(styles)
+
   return (
     <span 
       class={['lg:inline-block mx-2']} 

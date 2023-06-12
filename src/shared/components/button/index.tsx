@@ -1,18 +1,62 @@
 
-import { component$, Slot } from '@builder.io/qwik';
+import { component$, Slot, useComputed$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 
 interface ButtonProps{
-  onClick: ()=>void;
+  className?: string
+  href?: string
+  type?: 'Button' | 'Link' | 'Button-Outline' | 'Link-Outline'
+  onClick?: ()=>void;
   disabled?: boolean
 }
 
-export const Button = component$<ButtonProps>(({onClick, disabled=false}) => {
+export const Button = component$<ButtonProps>(({className= '', type = "Button", onClick, disabled=false, href = undefined}) => {
+  
+  const typeElement = useComputed$(() => {
+    const [base, option] = type.split('-')
+    const styleLinkDisabled = disabled && base === 'Link' && option === undefined 
+      ? 'bg-gray-700 text-gray-300 pointer-events-none cursor-not-allowed' 
+      : disabled && base === 'Link' && option === 'Outline' 
+        ? 'border-gray-700 text-gray-300 pointer-events-none cursor-not-allowed'
+        : ''
+    const styleButtonDisabled =  base === 'Button' && option === undefined 
+      ? 'disabled:border-gray-900 disabled:bg-gray-600 disabled:text-gray-500 disabled:pointer-events-none disabled:cursor-not-allowed' 
+      :  base === 'Button' && option === 'Outline'
+        ? 'disabled:border-gray-700 disabled:text-gray-500 disabled:pointer-events-none disabled:cursor-not-allowed'
+        : ''
+    return {
+      base,
+      optionStyle: option ? 'bg-black border-2 border-amber-500 text-amber-500 hover:bg-amber-500 hover:border-transparent hover:text-black' : 'bg-amber-500 text-slate-900 font-bold border-amber-500 hover:bg-amber-300 hover-border-amber-300',
+      styleLinkDisabled,
+      styleButtonDisabled
+
+    }
+  })
+  
   return (
-    <button 
-      class='px-8 py-2  border-2 scale-100 border-slate-600 rounded-md transition-all duration-300 hover:bg-slate-700 hover:border-transparen hover:scale-110 disabled:text-slate-700 disabled:border-slate-700 disabled:pointer-events-none' 
+    <>
+    {typeElement.value.base === "Button" &&
+      <button 
       onClick$={onClick}
-      disabled={disabled}>
-      <Slot />
-    </button>
+      disabled={disabled}
+      class={[' md:w-auto px-8 py-2 border-2 rounded-md', typeElement.value.optionStyle, `${typeElement.value.styleButtonDisabled}`, `${className}`]}>
+        <Slot />   
+      </button>
+    }
+    {typeElement.value.base === "Link" &&
+      <Link 
+        href={href}
+        class={['px-8 py-2 rounded-md duration-500 flex items-center justify-center ', typeElement.value.optionStyle, `${typeElement.value.styleLinkDisabled}`, `${className}`]}>
+        <Slot />
+      </Link>
+    }
+    
+    </>
+    // <button 
+    //   class='px-8 py-2  border-2 scale-100 border-slate-600 rounded-md transition-all duration-300 hover:bg-slate-700 hover:border-transparen hover:scale-110 disabled:text-slate-700 disabled:border-slate-700 disabled:pointer-events-none' 
+    //   onClick$={onClick}
+    //   disabled={disabled}>
+    //   <Slot />
+    // </button>
   )
 });

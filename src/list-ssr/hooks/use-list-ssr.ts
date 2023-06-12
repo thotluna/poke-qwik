@@ -1,8 +1,6 @@
 import { useComputed$ } from "@builder.io/qwik"
 import { useLocation } from "@builder.io/qwik-city"
 
-
-
 export const useListSsr = () => {
   const location = useLocation()
 
@@ -18,6 +16,7 @@ export const useListSsr = () => {
   })
 
   const lastPage = useComputed$(() => {
+    if(currentOffset.value - 1 <= 0) return `/pokemons/list-ssr/?offset=0`
     return `/pokemons/list-ssr/?offset=${currentOffset.value - 10 }`
   })
 
