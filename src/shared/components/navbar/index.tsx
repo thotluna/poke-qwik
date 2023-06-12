@@ -1,4 +1,4 @@
-import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { $, component$, useOnDocument, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { Button } from '../button';
 import { QwikSmallLogo } from '../icons';
@@ -25,6 +25,8 @@ export const NavBar = component$(() => {
       }
     }
   })
+
+  useOnDocument('load', $(() => {isHidden.value = true}))
 
   return (
     <nav class='p-5 bg-black lg:flex lg:item-center justify-between'>
