@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import { Button } from "~/shared/components/button";
 import { Header } from "~/shared/components/header";
+import { DoubleChevronLeft, DoubleChevronRight, HiddenIcon, RefreshICon, ShowIcon } from "~/shared/components/icons";
 import { ImagePokemon } from "~/shared/components/image-pokemon";
 
 interface PokemonGameProps{
@@ -49,26 +50,35 @@ export const PokemonGame = component$<PokemonGameProps>(({
           
           <footer class='w-full flex flex-row flex-wrap items-center justify-center px-8 py-2 gap-4'>
   
-            <Button
-              onClick={ toggleFromBack }>
-                {titleViewButton}
-            </Button>
-            <Button
-              onClick={ toggleVisible }>
-                {titleShowMeButton}
-            </Button>
-            <Button 
-              type="Button-Outline"
-              onClick={lastPokemons}
-              disabled={pokemonId <= 1}>
-              Last
-            </Button>
-            <Button 
-              type="Button-Outline"
-              disabled={pokemonId >= 1282}
-              onClick={nextPokemons}>
-              Next
-            </Button>
+            <div class='flex items-center gap-2'>
+              <Button
+                onClick={ toggleFromBack }>
+                  <span class='hidden lg:block'>{titleViewButton}</span>
+                  {isVisible && <HiddenIcon />}
+                  {!isVisible && <ShowIcon />}
+              </Button>
+              <Button
+                onClick={ toggleVisible }>
+                  <span class='hidden lg:block'>{titleShowMeButton}</span>
+                  <RefreshICon />
+              </Button>
+            </div>
+            <div class='flex items-center gap-2'>
+              <Button 
+                type="Button-Outline"
+                onClick={lastPokemons}
+                disabled={pokemonId <= 1}>
+                <DoubleChevronLeft />
+                <span class='hidden lg:block'>Last</span>
+              </Button>
+              <Button 
+                type="Button-Outline"
+                disabled={pokemonId >= 1282}
+                onClick={nextPokemons}>
+                <span class='hidden lg:block'>Next</span>
+                <DoubleChevronRight />
+              </Button>
+            </div>
           </footer>
         </article>
       </section>

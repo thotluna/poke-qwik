@@ -39,7 +39,7 @@ export const Button = component$<ButtonProps>(({className= '', type = "Button", 
       <button 
       onClick$={onClick}
       disabled={disabled}
-      class={[' md:w-auto px-8 py-2 border-2 rounded-md', typeElement.value.optionStyle, `${typeElement.value.styleButtonDisabled}`, `${className}`]}>
+      class={[' md:w-auto px-8 py-2 border-2 rounded-md flex flex-row items-center justify-center gap-1', typeElement.value.optionStyle, `${typeElement.value.styleButtonDisabled}`, `${className}`]}>
         <Slot />   
       </button>
     }
@@ -52,11 +52,5 @@ export const Button = component$<ButtonProps>(({className= '', type = "Button", 
     }
     
     </>
-    // <button 
-    //   class='px-8 py-2  border-2 scale-100 border-slate-600 rounded-md transition-all duration-300 hover:bg-slate-700 hover:border-transparen hover:scale-110 disabled:text-slate-700 disabled:border-slate-700 disabled:pointer-events-none' 
-    //   onClick$={onClick}
-    //   disabled={disabled}>
-    //   <Slot />
-    // </button>
   )
 });

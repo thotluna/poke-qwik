@@ -13,16 +13,18 @@ interface PokemonListSsrProps{
   pokemons?: SmallPokemon[]
 }
 
-export const PokemonListSsr = component$<PokemonListSsrProps>(({currentOffset, currentPage, lastPage, nextPage, pokemons}) => {
+export const PokemonListSsr = component$<PokemonListSsrProps>(({currentPage, lastPage, nextPage, pokemons}) => {
   return(
     <>
     <Header title='Pokemons List - SSR' >
-      <Button type='Link' href={lastPage} disabled={currentOffset === 0}>
+      <Button 
+        type='Link' 
+        href={lastPage}>
         <DoubleChevronLeft />
         <span class='hidden md:visible' >Last Page</span>
       </Button>
       <span class='text-white'>Current Page: {currentPage}</span>
-      <Button type='Link' href={nextPage} disabled={currentOffset === 1000}>
+      <Button type='Link' href={nextPage}>
         <span class="hidden md:visible">Next Page</span>
         <DoubleChevronRight />
       </Button>
