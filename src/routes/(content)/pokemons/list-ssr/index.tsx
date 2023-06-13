@@ -5,26 +5,26 @@ import type {PokemonListResponse, SmallPokemon } from '~/shared/interfaces';
 import { PokemonListSsr } from '~/list-ssr/components/pokemons-list-ssr';
 import { useListSsr } from '~/list-ssr/hooks/use-list-ssr';
 
+import { LIMIT_ITEMS_FOR_PAGE } from '~/shared/constants';
+
 export const useGetPokemons = routeLoader$<PokemonListResponse<SmallPokemon>>(async ({query, pathname, redirect}) => {
 
-  const offset = Number(query.get('offset') || 0)
+  const page = Number(query.get('page') || 0)
   
-  if(isNaN(offset)) redirect(301, pathname)
-  if(offset < 0) redirect(301, pathname)
-  if(offset > 1000) redirect(301, pathname)
+  if(isNaN(page)) redirect(301, pathname)
+  if(page < 0) redirect(301, pathname)
+  if(page > 1282) redirect(301, pathname)
   const controller = new AbortController()
-  const resp = await getSmallPokemons(controller, offset )
-  return resp
 
+  return await getSmallPokemons(controller, page, LIMIT_ITEMS_FOR_PAGE )
 })
 
 export default component$(() => {
   const response = useGetPokemons()
-  const { currentOffset, currentPage, lastPage, nextPage } = useListSsr()
+  const { currentPage, lastPage, nextPage } = useListSsr()
    
   return(
     <PokemonListSsr 
-      currentOffset={currentOffset.value} 
       currentPage={currentPage.value} 
       lastPage={lastPage.value} 
       nextPage={nextPage.value} 

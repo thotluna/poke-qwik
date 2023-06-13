@@ -6,7 +6,6 @@ import { Button } from '~/shared/components/button';
 import { DoubleChevronLeft, DoubleChevronRight } from '~/shared/components/icons';
 
 interface PokemonListSsrProps{
-  currentOffset: number
   currentPage:  number 
   lastPage: string
   nextPage: string,
@@ -21,9 +20,9 @@ export const PokemonListSsr = component$<PokemonListSsrProps>(({currentPage, las
         type='Link' 
         href={lastPage}>
         <DoubleChevronLeft />
-        <span class='hidden md:visible' >Last Page</span>
+        <span class='hidden md:visible'>Last Page</span>
       </Button>
-      <span class='text-white'>Current Page: {currentPage}</span>
+      <span class='text-white'>Current Page: {currentPage + 1}</span>
       <Button type='Link' href={nextPage}>
         <span class="hidden md:visible">Next Page</span>
         <DoubleChevronRight />

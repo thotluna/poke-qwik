@@ -1,6 +1,8 @@
 import type { BasicPokemonInfo, PokemonListResponse, SmallPokemon } from "~/shared/interfaces"
 
-export const getSmallPokemons = async ( controller: AbortController, offset: number = 0, limit: number = 10): Promise<PokemonListResponse<SmallPokemon>> => {
+export const getSmallPokemons = async ( controller: AbortController, page: number = 0, limit: number = 10): Promise<PokemonListResponse<SmallPokemon>> => {
+
+  const offset = page * limit 
 
   const resp = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`, {
     signal: controller?.signal

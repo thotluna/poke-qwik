@@ -1,31 +1,36 @@
+import type { Signal} from "@builder.io/qwik";
 import { useComputed$ } from "@builder.io/qwik"
 import { useLocation } from "@builder.io/qwik-city"
 
+
 export const useListSsr = () => {
   const location = useLocation()
-
-  const currentOffset = useComputed$(() => {
-    const searchParams = new URLSearchParams(location.url.search)
-    const offset = Number(searchParams.get('offset') || 0)
-
-    return offset
-  })  
+  const url = '/pokemons/list-ssr/'
 
   const currentPage = useComputed$(() => {
-    return (currentOffset.value / 10) + 1
-  })
+    const searchParams = new URLSearchParams(location.url.search)
+    const numberString = searchParams.get('page') || 0
+    return Number(numberString)
+  })  
+  
+  const lastPage: Readonly<Signal<string>> = useComputed$(() => {
+    if(currentPage.value - 1 <= 0) return `${url}?page=0`
 
-  const lastPage = useComputed$(() => {
-    if(currentOffset.value - 1 <= 0) return `/pokemons/list-ssr/?offset=0`
-    return `/pokemons/list-ssr/?offset=${currentOffset.value - 10 }`
+    const lpage = currentPage.value - 1
+
+    return `${url}?page=${lpage}`
   })
 
   const nextPage = useComputed$(() => {
-    return `/pokemons/list-ssr/?offset=${currentOffset.value + 10 }`
+    
+    if(currentPage.value + 1 > 1282) return `${url}?page=${currentPage.value}`
+
+    const nPage: number = currentPage.value + 1
+
+    return `${url}?page=${nPage}`
   })
 
   return {
-    currentOffset,
     currentPage,
     lastPage,
     nextPage
