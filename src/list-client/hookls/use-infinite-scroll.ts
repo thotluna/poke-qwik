@@ -1,22 +1,25 @@
-import { $, type QRL, useOnDocument } from "@builder.io/qwik"
+import { $, type QRL, useOnDocument } from "@builder.io/qwik";
 
-interface useInfiniteScrollProps{
-  isLoading: boolean
-  callback: QRL<() => void>
+interface useInfiniteScrollProps {
+  isLoading: boolean;
+  callback: QRL<() => void>;
 }
 
+export const useInfiniteScroll = ({
+  isLoading,
+  callback,
+}: useInfiniteScrollProps) => {
+  useOnDocument(
+    "scroll",
+    $(() => {
+      const maxScroll = document.body.scrollHeight;
+      const currentScroll = window.scrollY + window.innerHeight;
 
-export const  useInfiniteScroll = ({isLoading, callback}: useInfiniteScrollProps) => {
+      if (currentScroll + 200 >= maxScroll && !isLoading) {
+        console.log("entrando");
 
-  useOnDocument('scroll', $(() => {
-    const maxScroll = document.body.scrollHeight
-    const currentScroll = window.scrollY + window.innerHeight
-
-    if(currentScroll + 200 >= maxScroll && !isLoading) {
-      console.log('entrando');
-      
-      callback()
-    }
-
-  }))
-}
+        callback();
+      }
+    })
+  );
+};

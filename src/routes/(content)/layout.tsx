@@ -1,13 +1,11 @@
-import { component$, Slot } from '@builder.io/qwik';
-import { routeLoader$ } from '@builder.io/qwik-city';
-import type { RequestHandler } from '@builder.io/qwik-city';
+import { component$, Slot } from "@builder.io/qwik";
+import { routeLoader$ } from "@builder.io/qwik-city";
+import type { RequestHandler } from "@builder.io/qwik-city";
 
-import { Footer } from '~/shared/components/footer';
-import { PokemonGameProvider } from '~/game/context';
-import { PokemonListProvider } from '~/list-client/context';
-import { NavBar } from '~/shared/components/navbar';
-
-
+import { Footer } from "~/shared/components/footer";
+import { PokemonGameProvider } from "~/game/context";
+import { PokemonListProvider } from "~/list-client/context";
+import { NavBar } from "~/shared/components/navbar";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -27,13 +25,11 @@ export const useServerTimeLoader = routeLoader$(() => {
 });
 
 export default component$(() => {
-
-
   return (
     <PokemonGameProvider>
       <PokemonListProvider>
         <NavBar />
-        <main class='relative container mx-auto h-full p-4 flex-1 py-4'>
+        <main class="relative container mx-auto h-full p-4 flex-1 py-4">
           <Slot />
         </main>
         <Footer />

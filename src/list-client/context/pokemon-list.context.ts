@@ -1,19 +1,20 @@
 import { createContextId } from "@builder.io/qwik";
-import type{ SmallPokemon } from "~/shared/interfaces";
+import type { SmallPokemon } from "~/shared/interfaces";
 
-
-export interface PokemonListState{
-    currentPage : number,
-    pageLoader: number,
-    pokemons: SmallPokemon[],
-    loading: boolean
+export interface PokemonListState {
+  currentPage: number;
+  pageLoader: number;
+  pokemons: SmallPokemon[];
+  loading: boolean;
 }
 
 export const PokemonListStateInitial: PokemonListState = {
-  currentPage : 0,
-  pageLoader:-1,
+  currentPage: 0,
+  pageLoader: -1,
   pokemons: [],
-   loading: false
-}
+  loading: false,
+};
 
-export const PokemonListContext = createContextId<PokemonListState>('porkemon-list-context')
+export const PokemonListContext = createContextId<PokemonListState>(
+  "porkemon-list-context"
+);

@@ -1,1 +1,1 @@
-export const LIMIT_ITEMS_FOR_PAGE = 20
+export const LIMIT_ITEMS_FOR_PAGE = 20;

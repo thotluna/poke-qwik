@@ -1,17 +1,17 @@
-import { component$, Slot } from '@builder.io/qwik';
-import { Title } from '../title';
+import { component$, Slot } from "@builder.io/qwik";
+import { Title } from "../title";
 
-interface HeaderProps{
+interface HeaderProps {
   title: string;
 }
 
-export const Header = component$<HeaderProps>(({title}) => {
-  return(
-    <header class='w-full flex flex-col items-center'>
+export const Header = component$<HeaderProps>(({ title }) => {
+  return (
+    <header class="w-full flex flex-col items-center">
       <Title>{title}</Title>
-      <div class='flex items-center justify-between gap-8 m-4'>
+      <div class="flex items-center justify-between gap-8 m-4">
         <Slot />
       </div>
     </header>
-  )
+  );
 });
