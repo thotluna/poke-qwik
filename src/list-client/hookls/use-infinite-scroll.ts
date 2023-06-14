@@ -6,13 +6,15 @@ interface useInfiniteScrollProps{
 }
 
 
-export const useInfiniteScroll = ({isLoading, callback}: useInfiniteScrollProps) => {
+export const  useInfiniteScroll = ({isLoading, callback}: useInfiniteScrollProps) => {
 
   useOnDocument('scroll', $(() => {
     const maxScroll = document.body.scrollHeight
     const currentScroll = window.scrollY + window.innerHeight
 
     if(currentScroll + 200 >= maxScroll && !isLoading) {
+      console.log('entrando');
+      
       callback()
     }
 

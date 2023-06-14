@@ -3,15 +3,17 @@ import type{ SmallPokemon } from "~/shared/interfaces";
 
 
 export interface PokemonListState{
-    currentPage : 0,
+    currentPage : number,
+    pageLoader: number,
     pokemons: SmallPokemon[],
-    loading: false
+    loading: boolean
 }
 
 export const PokemonListStateInitial: PokemonListState = {
   currentPage : 0,
-    pokemons: [],
-    loading: false
+  pageLoader:-1,
+  pokemons: [],
+   loading: false
 }
 
 export const PokemonListContext = createContextId<PokemonListState>('porkemon-list-context')

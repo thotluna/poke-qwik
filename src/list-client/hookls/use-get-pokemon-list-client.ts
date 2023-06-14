@@ -1,26 +1,59 @@
-import { $, useTask$ } from "@builder.io/qwik"
+import { $, useOnDocument, useResource$, useVisibleTask$ } from "@builder.io/qwik"
+import { LIMIT_ITEMS_FOR_PAGE } from "~/shared/constants"
 import { getSmallPokemons } from "~/shared/helpers/get-small-pokemons"
-import { useInfiniteScroll } from "./use-infinite-scroll"
 import { usePokemonListContext } from "./use-pokemon-list-context"
 
-
 export const useGetPokemonListClient = () => {
-  const pokemonState = usePokemonListContext()
+  const state = usePokemonListContext()
 
-  useTask$(async({track, cleanup}) => {
-    track(() => pokemonState.currentPage)
+  useResource$(async ({track, cleanup}) => {
+    track(() => state.currentPage)
+
+    if(state.pageLoader >= state.currentPage){
+      state.loading = false
+      return
+    }
+
+    state.pageLoader = state.currentPage
     const controller = new AbortController()
-    const pokemonResponse = await getSmallPokemons(controller, pokemonState.currentPage * 10, 30)
-    pokemonState.pokemons = [...pokemonState.pokemons, ...pokemonResponse.results]
-    pokemonState.loading = false
+    const pokemonResponse = await getSmallPokemons(controller, state.currentPage , LIMIT_ITEMS_FOR_PAGE)
+
+    const setPokemons = new Set([...state.pokemons, ...pokemonResponse.results])
+    state.pokemons = Array.from(setPokemons)
+
     cleanup(() => controller.abort())
   })
 
-
-  useInfiniteScroll({
-    isLoading: pokemonState.loading, 
-    callback: $(() => {pokemonState.currentPage++})
+  const handlerNextPage = $(() => {
+    if(state.loading === false){
+      state.loading = true
+      state.currentPage++ 
+      console.log('boton')
+    }
   })
 
-  return pokemonState
+  useOnDocument('scroll', $(() => {
+    const maxScroll = document.body.scrollHeight
+    const currentScroll = window.scrollY + window.innerHeight
+
+    let flatScroll = 0
+
+    if(currentScroll + 200 >= maxScroll &&  flatScroll < currentScroll + 200)  {
+      flatScroll = currentScroll + 200
+      console.log('scroll', maxScroll, currentScroll);
+      
+      handlerNextPage()
+    }
+
+
+  }))
+
+  useVisibleTask$(({track}) => {
+    track(() => state.pokemons)
+
+    if(state.loading) state.loading = false
+  })
+
+
+  return {state, handlerNextPage}
 }
