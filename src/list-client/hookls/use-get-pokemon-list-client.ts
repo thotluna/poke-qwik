@@ -3,7 +3,6 @@ import {
   useOnDocument,
   useResource$,
   useSignal,
-  useTask$,
   useVisibleTask$,
 } from "@builder.io/qwik";
 import { LIMIT_ITEMS_FOR_PAGE } from "~/shared/constants";
