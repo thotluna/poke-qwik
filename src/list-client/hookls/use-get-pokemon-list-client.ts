@@ -1,10 +1,11 @@
-import { $, useOnDocument, useResource$, useVisibleTask$ } from "@builder.io/qwik"
+import { $, useOnDocument, useResource$, useSignal, useTask$, useVisibleTask$ } from "@builder.io/qwik"
 import { LIMIT_ITEMS_FOR_PAGE } from "~/shared/constants"
 import { getSmallPokemons } from "~/shared/helpers/get-small-pokemons"
 import { usePokemonListContext } from "./use-pokemon-list-context"
 
 export const useGetPokemonListClient = () => {
   const state = usePokemonListContext()
+  const isTop = useSignal(true)
 
   useResource$(async ({track, cleanup}) => {
     track(() => state.currentPage)
@@ -18,8 +19,11 @@ export const useGetPokemonListClient = () => {
     const controller = new AbortController()
     const pokemonResponse = await getSmallPokemons(controller, state.currentPage , LIMIT_ITEMS_FOR_PAGE)
 
+    
+    
     const setPokemons = new Set([...state.pokemons, ...pokemonResponse.results])
     state.pokemons = Array.from(setPokemons)
+    console.log('Obtebido');
 
     cleanup(() => controller.abort())
   })
@@ -32,9 +36,23 @@ export const useGetPokemonListClient = () => {
     }
   })
 
+  const handlerTop = $(() => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth"
+    })
+  })
+
   useOnDocument('scroll', $(() => {
     const maxScroll = document.body.scrollHeight
     const currentScroll = window.scrollY + window.innerHeight
+
+    if(window.scrollY > 200){
+      isTop.value = false
+    }else {
+      isTop.value = true
+    }
+
 
     let flatScroll = 0
 
@@ -50,10 +68,9 @@ export const useGetPokemonListClient = () => {
 
   useVisibleTask$(({track}) => {
     track(() => state.pokemons)
-
     if(state.loading) state.loading = false
   })
 
 
-  return {state, handlerNextPage}
+  return {state, handlerNextPage, isTop,  handlerTop}
 }
