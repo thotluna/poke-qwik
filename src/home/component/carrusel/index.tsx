@@ -1,9 +1,9 @@
 import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import {
+  Cloudflare,
   QwikLogo,
   TailwindLogo,
   TypeScriptLogo,
-  VercelLogo,
 } from "~/shared/components/icons";
 import styles from "./carrusel.module.css";
 
@@ -35,7 +35,7 @@ export const Carrusel = component$(() => {
     <article class={[styles.slider, "lg:w-1/3"]}>
       <div ref={carruselItems} class={[styles.track]}>
         <picture class={styles.slide}>
-          <VercelLogo width={100} height={26} />
+          <Cloudflare height={40} />
         </picture>
 
         <picture class={styles.slide}>
@@ -49,7 +49,16 @@ export const Carrusel = component$(() => {
           <TailwindLogo width={170} height={18} />
         </picture>
         <picture class={styles.slide}>
-          <VercelLogo width={100} height={26} />
+          <img
+            class="w-32 h-12"
+            width={128}
+            height={48}
+            src="/images/pokeapi.png"
+            alt="Pokeapi"
+          />
+        </picture>
+        <picture class={styles.slide}>
+          <Cloudflare height={40} />
         </picture>
         <picture class={styles.slide}>
           <TypeScriptLogo height={40} width={40} />
@@ -59,6 +68,15 @@ export const Carrusel = component$(() => {
         </picture>
         <picture class={styles.slide}>
           <TailwindLogo width={170} height={18} />
+        </picture>
+        <picture class={styles.slide}>
+          <img
+            class="w-32 h-10"
+            width={128}
+            height={40}
+            src="/images/pokeapi.png"
+            alt="Pokeapi"
+          />
         </picture>
       </div>
     </article>

@@ -10,11 +10,11 @@
   align-items: center;
   justify-items: center;
   animation: scroll 10s linear infinite;
-  width: calc(130px * 8);
+  width: calc(150px * 10);
 }
 
 .slide {
-  width: 100%;
+  width: 150px;
   display: flex;
   justify-content: center;
 }
@@ -24,6 +24,6 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-130px * 4));
+    transform: translateX(calc(-150px * 5));
   }
 }
