@@ -1,4 +1,4 @@
-import { $, useComputed$, useVisibleTask$ } from "@builder.io/qwik";
+import { $, useComputed$, useTask$ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import type { SmallPokemon } from "~/shared/interfaces";
 import { usePokemonGameContext } from "./use-pokemon-game-context";
@@ -20,7 +20,7 @@ export const usePokemonGame = () => {
     state.pokemonId += value;
   });
 
-  useVisibleTask$(async ({ track }) => {
+  useTask$(async ({ track }) => {
     track(() => state.pokemonId);
     const baseUrl = location.url;
 

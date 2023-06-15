@@ -1,13 +1,12 @@
 import { component$ } from "@builder.io/qwik";
-import { useGetPokemonListClient } from "~/list-client/hookls/use-get-pokemon-list-client";
+import { useGetPokemonListClient } from "~/list-client/hooks/use-get-pokemon-list-client";
 import { Button } from "~/shared/components/button";
 import { Header } from "~/shared/components/header";
 import { DoubleChevronRight, UpIcon } from "~/shared/components/icons";
 import { PokemonsGrid } from "~/shared/components/pokemon-grid";
 
 export const PokemonsListClient = component$(() => {
-  const { state, handlerNextPage, isTop, handlerTop } =
-    useGetPokemonListClient();
+  const { state, handlerNextPage, isTop, handlerTop } = useGetPokemonListClient();
 
   return (
     <>
