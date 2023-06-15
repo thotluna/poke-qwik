@@ -6,7 +6,8 @@ import { DoubleChevronRight, UpIcon } from "~/shared/components/icons";
 import { PokemonsGrid } from "~/shared/components/pokemon-grid";
 
 export const PokemonsListClient = component$(() => {
-  const { state, handlerNextPage, isTop, handlerTop } = useGetPokemonListClient();
+  const { state, handlerNextPage, isTop, handlerTop } =
+    useGetPokemonListClient();
 
   return (
     <>

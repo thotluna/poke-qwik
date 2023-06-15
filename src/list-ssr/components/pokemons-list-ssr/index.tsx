@@ -31,16 +31,16 @@ export const PokemonListSsr = component$<PokemonListSsrProps>(
           </Button>
         </Header>
         <PokemonsGrid pokemons={pokemons} />
-        <div class='flex md:flex-col flex-wrap items-center justify-center gap-8 m-8'>
+        <div class="flex md:flex-col flex-wrap items-center justify-center gap-8 m-8">
           <Button type="Link" href={lastPage}>
-              <DoubleChevronLeft />
-              <span class="hidden md:visible">Last Page</span>
-            </Button>
-            <span class="text-white">Current Page: {currentPage + 1}</span>
-            <Button type="Link" href={nextPage}>
-              <span class="hidden md:visible">Next Page</span>
-              <DoubleChevronRight />
-            </Button>
+            <DoubleChevronLeft />
+            <span class="hidden md:visible">Last Page</span>
+          </Button>
+          <span class="text-white">Current Page: {currentPage + 1}</span>
+          <Button type="Link" href={nextPage}>
+            <span class="hidden md:visible">Next Page</span>
+            <DoubleChevronRight />
+          </Button>
         </div>
       </>
     );

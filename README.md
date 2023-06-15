@@ -1,14 +1,18 @@
 # Poke - Qwik
+
 This is a web application that allows you to view information about pokemons using the Pokeapi API. It was developed using Typescript and Qwik, and deployed on Cloudflare. Tailwind was also used for interface design.
 
 ## SSR
+
 pokemon list
 This page allows you to see a paginated listing of 20 pokemons per page, using the URL. The pokemon API call is made on the server, and the server delivers the full HTML to be rendered by the client with SSR.
 
 ## Game
+
 This page allows you to view detailed information about a particular pokemon. No server is required to run, and no pokemon API calls are made.
 
 ## CSR
+
 This page allows you to see a list of pokemons with infinite scroll. The request is made both on the server and on the client.
 
 facility
@@ -17,7 +21,6 @@ Run npm install to install the dependencies.
 Run npm run dev to start the app in development mode.
 contributions
 If you want to help improve this app, please send a pull request or open an issue. All contributions are welcome!
-
 
 ---
 
@@ -42,7 +45,6 @@ Inside your project, you'll see the following directory structure:
     └── routes/
         └── ...
 ```
-
 
 ## Development
 
@@ -79,5 +81,3 @@ pnpm serve
 ```
 
 Then visit [http://localhost:8787/](http://localhost:8787/)
-
-
