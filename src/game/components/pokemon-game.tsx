@@ -38,11 +38,10 @@ export const PokemonGame = component$<PokemonGameProps>(
     nextPokemons,
   }) => {
     return (
-      <section class="flex h-full justify-center items-center text-white">
-        <article class="flex h-full flex-col items-center justify-between">
+      <section class="flex flex-col h-full justify-center items-center text-white">
           <Header title="POKEMON CHARACTER" />
 
-          <div class="flex flex-col item justify-between flex-1">
+          <article class="flex flex-col flex-1 items-center justify-between">
             <span class="text-2xl text-center">{name}</span>
             <span class="text-7xl text-center ">{pokemonId}</span>
             <Link href={`/game/pokemon/${pokemonId}`}>
@@ -52,7 +51,7 @@ export const PokemonGame = component$<PokemonGameProps>(
                 isVisible={isVisible}
               />
             </Link>
-          </div>
+          </article>
 
           <footer class="w-full flex flex-row flex-wrap items-center justify-center px-8 py-2 gap-4">
             <div class="flex items-center gap-2">
@@ -85,7 +84,6 @@ export const PokemonGame = component$<PokemonGameProps>(
               </Button>
             </div>
           </footer>
-        </article>
       </section>
     );
   }
